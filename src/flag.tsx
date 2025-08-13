@@ -7,6 +7,7 @@ export default function FlagSelector() {
     <ReactFlagsSelect
       selected={selected}
       onSelect={setSelected}
+      searchable 
     />
   );
 }
