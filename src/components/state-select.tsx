@@ -1,14 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 
-
-export default function StateSelect({ selected, setSelected , STATES}) {
+export default function StateSelect({
+  selected,
+  setSelected,
+  STATES,
+  className,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -26,24 +34,30 @@ export default function StateSelect({ selected, setSelected , STATES}) {
       <label className="block mb-1 font-medium">State</label>
       <button
         type="button"
-        className="w-full border border-gray-300 bg-white rounded-md px-4 py-2 text-left shadow-sm flex items-center justify-between hover:border-gray-400 focus:outline-none focus:ring-0 focus:border-gray-400"
+        className={`w-full border border-gray-300 bg-white rounded-md px-4 py-2 text-left shadow-sm flex items-center justify-between hover:border-gray-400 focus:outline-none focus:ring-0 focus:border-gray-400 ${className}`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <span className="flex items-center gap-2">
-          {selected ? (
-              <span>{selected.name}</span>
+          {selected.name ? (
+            <span>{selected.name}</span>
           ) : (
             <span className="text-gray-400">Pick your state</span>
           )}
         </span>
         <svg
-          className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`w-4 h-4 transform transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
